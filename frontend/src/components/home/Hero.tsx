@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
    for more body than the previous Inter extralight.
    ────────────────────────────────────────────────────────────────── */
 const titleClasses =
-  "text-[clamp(2.5rem,7vw,6rem)] tracking-[0.25em] uppercase font-light leading-none font-[family-name:var(--font-display)]";
+  "text-[clamp(2.25rem,6.5vw,5.5rem)] tracking-[0.10em] sm:tracking-[0.14em] md:tracking-[0.16em] uppercase font-normal leading-none font-[family-name:var(--font-display)]";
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -97,13 +97,13 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_rgba(0,0,0,0.6)_100%)] pointer-events-none" />
 
         {/* Localized radial darkening behind the title area only.
-            Tighter ellipse, subtle opacity — creates readable zone
-            without looking like a visible panel or overlay. */}
+            Subtly soft ellipse — creates readable zone over bright video
+            without looking like a visible box or heavy overlay. */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 60% 40% at 50% 46%, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.18) 50%, transparent 80%)",
+              "radial-gradient(ellipse 65% 45% at 50% 46%, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.22) 55%, transparent 80%)",
           }}
         />
 
@@ -113,8 +113,9 @@ export function Hero() {
 
       {/* ═══════════════════════════════════════════════════════════
           TITLE LAYER 1 — Base text (foundational readability)
-          Off-white / silver fill at reduced opacity. This ensures
-          the title is always legible even on busy footage.
+          Subtle off-white fill with deep shadow provides a stable
+          shadow shelf, allowing the moving video texture in Layer 2
+          to have full dynamic contrast without washing out.
           ═══════════════════════════════════════════════════════════ */}
       <div
         className="absolute inset-0 z-10 flex items-center justify-center text-center pointer-events-none"
@@ -123,9 +124,9 @@ export function Hero() {
         <h1
           className={titleClasses}
           style={{
-            color: "rgba(230, 228, 225, 0.55)",
+            color: "rgba(242, 240, 238, 0.22)",
             textShadow:
-              "0 0 40px rgba(0,0,0,0.5), 0 2px 20px rgba(0,0,0,0.3)",
+              "0 0 32px rgba(0,0,0,0.85), 0 2px 16px rgba(0,0,0,0.7)",
           }}
         >
           {siteConfig.name}
@@ -133,10 +134,10 @@ export function Hero() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          TITLE LAYER 2 — Masked video (the premium effect)
-          Duplicate video, desaturated + brightened + softened so it
-          reads as a refined moving silver/luminous texture inside
-          the letterforms — not a busy literal second video.
+          TITLE LAYER 2 — Masked video (the dynamic dual-video effect)
+          Duplicate video with boosted contrast and silver luminance.
+          Motion, dancers, choreography, and light sweeps punch
+          through the letterforms with vivid clarity.
           ═══════════════════════════════════════════════════════════ */}
       <div className="absolute inset-0 z-20 pointer-events-none mix-blend-screen">
         <div className="absolute inset-0 overflow-hidden bg-black">
@@ -147,7 +148,7 @@ export function Hero() {
               loop
               muted
               playsInline
-              className="object-cover w-full h-full grayscale brightness-[2.0] contrast-[0.65] blur-[0.5px] opacity-90"
+              className="object-cover w-full h-full grayscale brightness-[1.35] contrast-[1.45]"
             >
               <source src={videoSrc} type="video/mp4" />
             </video>
@@ -167,9 +168,8 @@ export function Hero() {
 
       {/* ═══════════════════════════════════════════════════════════
           TITLE LAYER 3 — Edge / stroke highlight
-          Very subtle text-stroke gives the letters just enough
-          definition to separate from the footage without being
-          heavy-handed. Uses a faint bright outline.
+          Crisp, fine text-stroke ensures letterform edges stay
+          razor-sharp even during dark video frames.
           ═══════════════════════════════════════════════════════════ */}
       <div
         className="absolute inset-0 z-30 flex items-center justify-center text-center pointer-events-none"
@@ -180,7 +180,7 @@ export function Hero() {
           className={titleClasses}
           style={{
             color: "transparent",
-            WebkitTextStroke: "0.5px rgba(255, 255, 255, 0.12)",
+            WebkitTextStroke: "0.5px rgba(255, 255, 255, 0.24)",
           }}
         >
           {siteConfig.name}
@@ -189,35 +189,45 @@ export function Hero() {
 
       {/* ═══════════════════════════════════════════════════════════
           CONTENT LAYER — CTAs
-          Clean, readable, understated. No masked-video effect.
+          Clean, readable, editorial. font-weight: 500, tighter
+          tracking (0.09em–0.11em), increased mobile font size (+9%),
+          and optically balanced vertical separation.
+          Positioned directly below the title bounding box so the
+          title's vertical centering is perfectly preserved.
           ═══════════════════════════════════════════════════════════ */}
       <div
-        className="relative z-40 flex flex-col items-center justify-center text-center pointer-events-auto"
+        className="absolute inset-0 z-40 flex items-center justify-center text-center pointer-events-none"
         style={{ marginTop: "-3vh" }}
       >
-        {/* Invisible spacer matching the title to position CTAs below it */}
-        <div
-          className={`${titleClasses} opacity-0 select-none pointer-events-none`}
-          aria-hidden="true"
-        >
-          {siteConfig.name}
-        </div>
+        <div className="relative flex flex-col items-center">
+          {/* Invisible anchor matching the title bounding box pixel-for-pixel */}
+          <div
+            className={`${titleClasses} opacity-0 select-none pointer-events-none`}
+            aria-hidden="true"
+          >
+            {siteConfig.name}
+          </div>
 
-        <div className="mt-12 flex gap-12 items-center">
-          <Link
-            href="/work"
-            className="text-[11px] tracking-[0.2em] uppercase font-light text-white/85 border-b border-white/35 pb-1.5 transition-all duration-300 hover:text-white hover:border-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-            style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}
+          {/* CTAs anchored below the title with generous editorial breathing room */}
+          <div
+            className="absolute top-full flex flex-row gap-8 sm:gap-11 md:gap-14 lg:gap-16 items-center justify-center pointer-events-auto"
+            style={{ marginTop: "clamp(2.25rem, 5.5vw, 4.5rem)" }}
           >
-            View Portfolio
-          </Link>
-          <Link
-            href="/availability"
-            className="text-[11px] tracking-[0.2em] uppercase font-light text-white/85 border-b border-white/35 pb-1.5 transition-all duration-300 hover:text-white hover:border-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-            style={{ textShadow: "0 1px 12px rgba(0,0,0,0.6)" }}
-          >
-            Check Availability
-          </Link>
+            <Link
+              href="/work"
+              className="text-[12px] md:text-[11.5px] tracking-[0.09em] sm:tracking-[0.11em] uppercase font-medium text-white/90 border-b border-white/40 pb-1.5 transition-all duration-300 hover:text-white hover:border-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black whitespace-nowrap"
+              style={{ textShadow: "0 1px 14px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)" }}
+            >
+              View Portfolio
+            </Link>
+            <Link
+              href="/availability"
+              className="text-[12px] md:text-[11.5px] tracking-[0.09em] sm:tracking-[0.11em] uppercase font-medium text-white/90 border-b border-white/40 pb-1.5 transition-all duration-300 hover:text-white hover:border-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black whitespace-nowrap"
+              style={{ textShadow: "0 1px 14px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)" }}
+            >
+              Check Availability
+            </Link>
+          </div>
         </div>
       </div>
     </section>
