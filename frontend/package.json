@@ -6,7 +6,6 @@
     "dev": "next dev --turbopack",
     "prebuild": "node ../tools/ensure_lightningcss.js",
     "build": "next build",
-    "postbuild": "node -e \"const fs=require('fs'); if (fs.existsSync('out')) { fs.mkdirSync('dist', {recursive:true}); fs.cpSync('out', 'dist', {recursive:true}); }\"",
     "start": "npx serve@latest out",
     "lint": "eslint .",
     "test": "vitest run"

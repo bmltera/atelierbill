@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "outputDirectory": "dist",
   "installCommand": "npm install && node tools/ensure_lightningcss.js",
   "headers": [
     {
