@@ -42,18 +42,24 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 text-sm tracking-widest font-medium">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                className={`transition-colors hover:text-white ${
-                  pathname === link.href ? "text-white" : "text-neutral-400"
-                } ${link.href === "/availability" ? "text-neutral-200" : ""}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] font-light">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={`relative py-1 transition-colors duration-300 hover:text-white ${
+                    isActive ? "text-white" : "text-neutral-500"
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/30" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile Toggle */}
@@ -76,18 +82,24 @@ export function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col justify-center items-center"
           >
-            <nav className="flex flex-col items-center gap-8 text-2xl tracking-widest">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
-                  href={link.href}
-                  className={`transition-colors hover:text-white ${
-                    pathname === link.href ? "text-white" : "text-neutral-500"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="flex flex-col items-center gap-8 text-xl tracking-[0.3em] font-light">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link 
+                    key={link.href} 
+                    href={link.href}
+                    className={`relative py-1 transition-colors duration-300 hover:text-white ${
+                      isActive ? "text-white" : "text-neutral-500"
+                    }`}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <span className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-white/30" />
+                    )}
+                  </Link>
+                );
+              })}
             </nav>
           </motion.div>
         )}

@@ -2,6 +2,16 @@ import { describe, it, expect } from "vitest";
 import { AvailabilityEngine } from "../engine";
 import { AvailabilityConfig } from "../types";
 
+const defaultSchedule = {
+  monday: { enabled: false, capacity: 0 },
+  tuesday: { enabled: false, capacity: 0 },
+  wednesday: { enabled: false, capacity: 0 },
+  thursday: { enabled: false, capacity: 0 },
+  friday: { enabled: true, capacity: 1 },
+  saturday: { enabled: true, capacity: 2 },
+  sunday: { enabled: true, capacity: 2 },
+};
+
 const mockConfig: AvailabilityConfig = {
   timezone: "America/Los_Angeles",
   display: {
@@ -11,15 +21,6 @@ const mockConfig: AvailabilityConfig = {
     showWeekSummary: true,
     showMonthSummary: true,
     showExactDayStatuses: true,
-  },
-  defaultSchedule: {
-    monday: { enabled: false, capacity: 0 },
-    tuesday: { enabled: false, capacity: 0 },
-    wednesday: { enabled: false, capacity: 0 },
-    thursday: { enabled: false, capacity: 0 },
-    friday: { enabled: true, capacity: 1 },
-    saturday: { enabled: true, capacity: 2 },
-    sunday: { enabled: true, capacity: 2 },
   },
   limits: {
     maxBookingsPerWeek: 4,
@@ -35,7 +36,7 @@ const mockConfig: AvailabilityConfig = {
 
 describe("AvailabilityEngine", () => {
   it("should return unavailable for disabled weekdays", () => {
-    const engine = new AvailabilityEngine(mockConfig, [], [], []);
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [], [], []);
     // 2026-09-02 is a Wednesday
     const result = engine.getDayAvailability("2026-09-02");
     expect(result.status).toBe("unavailable");
@@ -43,7 +44,7 @@ describe("AvailabilityEngine", () => {
   });
 
   it("should return available for enabled weekends with no bookings", () => {
-    const engine = new AvailabilityEngine(mockConfig, [], [], []);
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [], [], []);
     // 2026-09-05 is a Saturday
     const result = engine.getDayAvailability("2026-09-05");
     expect(result.status).toBe("available");
@@ -52,7 +53,7 @@ describe("AvailabilityEngine", () => {
   });
 
   it("should return booked when fully booked", () => {
-    const engine = new AvailabilityEngine(mockConfig, [], [], [
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [], [], [
       { date: "2026-09-05", quantity: 2 }
     ]);
     const result = engine.getDayAvailability("2026-09-05");
@@ -61,7 +62,7 @@ describe("AvailabilityEngine", () => {
   });
 
   it("should return limited when partially booked", () => {
-    const engine = new AvailabilityEngine(mockConfig, [], [], [
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [], [], [
       { date: "2026-09-05", quantity: 1 }
     ]);
     const result = engine.getDayAvailability("2026-09-05");
@@ -70,7 +71,7 @@ describe("AvailabilityEngine", () => {
   });
 
   it("should apply manual date overrides", () => {
-    const engine = new AvailabilityEngine(mockConfig, [
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [
       { date: "2026-09-02", status: "available", capacity: 1, reason: "Special Opening" }
     ], [], []);
     const result = engine.getDayAvailability("2026-09-02");
@@ -80,7 +81,7 @@ describe("AvailabilityEngine", () => {
   });
 
   it("should apply date range overrides", () => {
-    const engine = new AvailabilityEngine(mockConfig, [], [
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [], [
       { start: "2026-09-04", end: "2026-09-06", status: "travel", publicLabel: "Travel" }
     ], []);
     
@@ -92,7 +93,7 @@ describe("AvailabilityEngine", () => {
   });
 
   it("should apply weekend capacity limits", () => {
-    const engine = new AvailabilityEngine(mockConfig, [], [], [
+    const engine = new AvailabilityEngine(mockConfig, defaultSchedule, [], [], [
       { date: "2026-09-05", quantity: 2 }, // Saturday: 2 bookings
       { date: "2026-09-06", quantity: 1 }  // Sunday: 1 booking (Total 3 weekend bookings)
     ]);

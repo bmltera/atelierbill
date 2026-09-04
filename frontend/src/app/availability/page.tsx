@@ -44,18 +44,15 @@ export default function AvailabilityPage() {
           
           return (
             <div key={monthDate.toISOString()}>
-              <div className="flex justify-between items-end mb-8 border-b border-neutral-900 pb-4">
-                <h2 className="text-3xl font-light tracking-widest uppercase">
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 mb-12 border-b border-neutral-900 pb-6">
+                <h2 className="text-3xl md:text-4xl font-light tracking-[0.2em] uppercase text-neutral-200">
                   {format(monthDate, "MMMM yyyy")}
                 </h2>
-                <div className="text-sm tracking-widest text-neutral-500 uppercase">
-                  {util.percentageBooked}% Booked
-                </div>
               </div>
 
-              <div className="grid grid-cols-7 gap-1 md:gap-4 mb-4">
+              <div className="grid grid-cols-7 gap-2 md:gap-4 mb-4">
                 {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(d => (
-                  <div key={d} className="text-center text-xs tracking-widest text-neutral-600 uppercase pb-2">
+                  <div key={d} className="text-center text-[10px] tracking-[0.2em] text-neutral-600 uppercase pb-4">
                     {d}
                   </div>
                 ))}
@@ -91,21 +88,21 @@ export default function AvailabilityPage() {
 function DayCell({ date, status, remaining, label, isPast }: { date: Date, status: DayStatus, remaining: number, label?: string, isPast: boolean }) {
   if (isPast) {
     return (
-      <div className="aspect-square flex flex-col items-center justify-center border border-neutral-900/50 opacity-30">
-        <span className="text-lg font-light">{format(date, "d")}</span>
+      <div className="aspect-square flex flex-col items-center justify-center border border-transparent opacity-20">
+        <span className="text-lg md:text-xl font-light text-neutral-600">{format(date, "d")}</span>
       </div>
     );
   }
 
   const isBookable = status === "available" || status === "limited";
   const statusColor = {
-    available: "border-white/20 hover:border-white text-white",
-    limited: "bg-amber-950/20 border-amber-900/40 hover:border-amber-700 text-amber-500",
-    booked: "bg-neutral-900 border-neutral-800 text-neutral-600",
-    unavailable: "bg-neutral-900 border-neutral-800 text-neutral-600",
-    closed: "bg-neutral-900 border-neutral-800 text-neutral-600",
-    travel: "bg-blue-950/20 border-blue-900/40 text-blue-500",
-    tbd: "border-neutral-900 text-neutral-500",
+    available: "border-neutral-800 hover:border-white/50 text-neutral-200 hover:text-white bg-transparent",
+    limited: "border-amber-900/30 hover:border-amber-700/50 text-amber-500/80 hover:text-amber-400 bg-amber-950/10",
+    booked: "border-transparent text-neutral-800 bg-neutral-950/50",
+    unavailable: "border-transparent text-neutral-800 bg-neutral-950/50",
+    closed: "border-transparent text-neutral-800 bg-neutral-950/50",
+    travel: "border-transparent text-neutral-800 bg-neutral-950/50",
+    tbd: "border-transparent text-neutral-800 bg-neutral-950/50",
   }[status];
 
   const displayStatus = status === "booked" ? "unavailable" : status;
@@ -113,14 +110,14 @@ function DayCell({ date, status, remaining, label, isPast }: { date: Date, statu
   const finalLabel = (label === "Travel" || label === "Booked") ? "unavailable" : (label || displayStatus);
   const content = (
     <>
-      <span className="text-lg md:text-xl font-light mb-0.5 md:mb-1">{format(date, "d")}</span>
-      <span className="text-[7px] md:text-[10px] tracking-wide md:tracking-widest uppercase text-center px-0.5 w-full truncate">
+      <span className="text-lg md:text-xl font-light mb-1 md:mb-2">{format(date, "d")}</span>
+      <span className="text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-center px-1 w-full truncate opacity-70">
         {finalLabel}
       </span>
     </>
   );
 
-  const baseClasses = `aspect-square flex flex-col items-center justify-center border transition-colors ${statusColor}`;
+  const baseClasses = `aspect-square flex flex-col items-center justify-center border transition-all duration-500 ${statusColor}`;
 
   if (isBookable) {
     return (

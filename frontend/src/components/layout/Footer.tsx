@@ -2,26 +2,26 @@ import { siteConfig } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 mt-auto">
-      <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="text-sm text-neutral-500 tracking-widest uppercase">
+    <footer className="mt-auto pb-12 pt-24">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="text-[10px] text-neutral-600 tracking-[0.2em] uppercase">
           &copy; {new Date().getFullYear()} {siteConfig.name}
         </div>
         
-        <div className="flex gap-6 text-sm tracking-widest">
+        <div className="flex gap-8 text-[10px] tracking-[0.2em] uppercase">
           <a 
             href={siteConfig.contact.instagram} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-neutral-400 hover:text-white transition-colors"
+            className="text-neutral-600 hover:text-neutral-300 transition-colors duration-300"
           >
-            INSTAGRAM
+            Instagram
           </a>
           <a 
             href={`mailto:${siteConfig.contact.email}`}
-            className="text-neutral-400 hover:text-white transition-colors"
+            className="text-neutral-600 hover:text-neutral-300 transition-colors duration-300"
           >
-            EMAIL
+            Email
           </a>
         </div>
       </div>

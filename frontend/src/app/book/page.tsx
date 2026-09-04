@@ -9,29 +9,36 @@ function BookingForm() {
   const dateStr = searchParams.get("date");
 
   return (
-    <div className="pt-32 pb-24 max-w-2xl mx-auto px-6 w-full text-center">
-      <h1 className="text-4xl md:text-6xl font-light tracking-widest uppercase mb-8">
-        Booking
-      </h1>
+    <div className="pt-40 pb-32 max-w-4xl mx-auto px-6 w-full flex flex-col items-center justify-center min-h-[70vh]">
+      <div className="w-full flex flex-col items-center border-y border-neutral-900 py-24 relative">
+        <h1 className="text-4xl md:text-5xl font-light tracking-[0.3em] uppercase mb-12 text-center text-white/90">
+          Booking
+        </h1>
 
-      {dateStr && (
-        <div className="mb-12 inline-block px-6 py-3 border border-white/20 text-sm tracking-widest uppercase">
-          Requested Date: <span className="text-white">{dateStr}</span>
-        </div>
-      )}
+        {dateStr && (
+          <div className="mb-12 text-xs tracking-[0.2em] uppercase text-neutral-500 flex items-center gap-4">
+            <span className="h-px w-8 bg-neutral-800" />
+            <span>Requested Date: <span className="text-neutral-200 ml-2">{dateStr}</span></span>
+            <span className="h-px w-8 bg-neutral-800" />
+          </div>
+        )}
 
-      <p className="text-neutral-400 font-light mb-16 leading-relaxed">
-        Please dm us on Instagram to inquire about availability and rates.
-      </p>
+        <p className="text-neutral-400 font-light mb-24 text-center max-w-md leading-relaxed tracking-wide">
+          Please dm us on Instagram to inquire about availability and rates.
+        </p>
 
-      <div className="flex justify-center">
         <a
           href={siteConfig.contact.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-12 py-5 bg-white text-black text-sm tracking-widest font-medium hover:bg-neutral-200 transition-colors uppercase"
+          className="group flex flex-col items-center"
         >
-          Contact on Instagram
+          <span className="text-xs tracking-[0.2em] uppercase text-neutral-500 mb-4 transition-colors duration-300 group-hover:text-neutral-300">
+            Contact on
+          </span>
+          <span className="text-2xl md:text-4xl font-light tracking-widest uppercase border-b border-transparent group-hover:border-white transition-colors duration-500 pb-2 text-neutral-200 group-hover:text-white">
+            Instagram
+          </span>
         </a>
       </div>
     </div>

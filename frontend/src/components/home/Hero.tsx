@@ -37,24 +37,24 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl mx-auto mt-20">
-        <h1 className="text-4xl md:text-6xl lg:text-8xl tracking-widest uppercase font-medium mb-6">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto h-full pb-16">
+        <h1 className="text-3xl md:text-5xl lg:text-7xl tracking-[0.3em] uppercase font-light text-white/90 mb-8">
           {siteConfig.name}
         </h1>
-        <p className="text-neutral-300 text-lg md:text-2xl max-w-2xl mb-12 font-light">
+        <p className="text-neutral-400 text-sm md:text-base max-w-xl mb-16 font-light tracking-wide leading-relaxed">
           {siteConfig.description}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-10 w-full sm:w-auto items-center justify-center">
           <Link 
             href="/work"
-            className="px-8 py-4 bg-white text-black text-sm tracking-widest font-medium hover:bg-neutral-200 transition-colors uppercase text-center"
+            className="text-xs tracking-[0.2em] font-light text-white uppercase transition-colors duration-300 border-b border-white/30 hover:border-white/70 pb-2"
           >
             View Work
           </Link>
           <Link 
             href="/availability"
-            className="px-8 py-4 bg-transparent border border-white text-white text-sm tracking-widest font-medium hover:bg-white/10 transition-colors uppercase text-center"
+            className="text-xs tracking-[0.2em] font-light text-neutral-400 uppercase transition-colors duration-300 border-b border-transparent hover:text-white hover:border-white/30 pb-2"
           >
             Check Availability
           </Link>

@@ -8,6 +8,7 @@ import {
   bookings as initialBookings 
 } from "@/availability/overrides";
 import { format, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isWithinInterval, isSameDay } from "date-fns";
+import { DayStatus } from "@/availability/types";
 
 export default function AdminCalendarPage() {
   const [mounted, setMounted] = useState(false);

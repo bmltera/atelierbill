@@ -37,30 +37,7 @@ export function QuickAvailability() {
                 <div className="text-3xl md:text-5xl font-light mb-2 uppercase tracking-wide">
                   {currentMonth}
                 </div>
-                <div className="text-neutral-400 text-sm tracking-widest uppercase flex items-center gap-3">
-                  <div className="w-16 h-1 bg-neutral-800 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-white transition-all duration-1000"
-                      style={{ width: `${monthUtil.percentageBooked}%` }}
-                    />
-                  </div>
-                  {monthUtil.percentageBooked}% Booked
-                </div>
               </div>
-
-              {nextDates.length > 0 && (
-                <div className="sm:ml-auto">
-                  <div className="text-xs text-neutral-500 tracking-[0.2em] uppercase mb-3">Next Openings</div>
-                  <div className="text-lg md:text-xl tracking-wider font-light flex gap-4">
-                    {nextDates.map((date, i) => (
-                      <span key={date} className="flex items-center gap-4">
-                        {format(new Date(date), "MMM d")}
-                        {i < nextDates.length - 1 && <span className="text-neutral-700">/</span>}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
