@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { engine, selectors } from "@/availability";
-import { format, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isSameMonth } from "date-fns";
+import { format, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, getDay } from "date-fns";
 import Link from "next/link";
 import { DayStatus } from "@/availability/types";
-import { siteConfig } from "@/content/site";
 
 export default function AvailabilityPage() {
   const [mounted, setMounted] = useState(false);
   const [months, setMonths] = useState<Date[]>([]);
   const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   useEffect(() => {
     setMounted(true);
@@ -21,38 +21,30 @@ export default function AvailabilityPage() {
     setMonths(m);
   }, []);
 
-  if (!mounted) return <div className="pt-32 pb-24 max-w-7xl mx-auto px-6 min-h-screen">Loading...</div>;
+  if (!mounted) return <div className="pt-32 pb-24 max-w-[1200px] mx-auto px-8 md:px-12 min-h-screen" />;
 
   return (
-    <div className="pt-32 pb-24 max-w-5xl mx-auto px-6 w-full">
-      <h1 className="text-4xl md:text-6xl font-light tracking-widest uppercase mb-8 text-center">
+    <div className="pt-32 pb-24 max-w-[900px] mx-auto px-8 md:px-12 w-full">
+      <h1 className="text-[clamp(1.5rem,4vw,3rem)] font-extralight tracking-[0.25em] uppercase mb-20 text-center text-white/90">
         Availability
       </h1>
-      <p className="text-center text-neutral-400 font-light mb-24 max-w-2xl mx-auto leading-relaxed">
-        {siteConfig.availabilityText}
-      </p>
 
-      <div className="flex flex-col gap-24">
+      <div className="flex flex-col gap-20">
         {months.map((monthDate) => {
-          const util = selectors.getMonthUtilization(monthDate.getFullYear(), monthDate.getMonth() + 1);
           const start = startOfMonth(monthDate);
           const end = endOfMonth(monthDate);
           const days = eachDayOfInterval({ start, end });
-          
-          // Pad start
-          const startPadding = getDay(start); // 0 = Sunday
+          const startPadding = getDay(start);
           
           return (
             <div key={monthDate.toISOString()}>
-              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 mb-12 border-b border-neutral-900 pb-6">
-                <h2 className="text-3xl md:text-4xl font-light tracking-[0.2em] uppercase text-neutral-200">
-                  {format(monthDate, "MMMM yyyy")}
-                </h2>
-              </div>
+              <h2 className="text-lg md:text-xl font-extralight tracking-[0.2em] uppercase text-white/60 mb-8 pb-4 border-b border-white/[0.06]">
+                {format(monthDate, "MMMM yyyy")}
+              </h2>
 
-              <div className="grid grid-cols-7 gap-2 md:gap-4 mb-4">
-                {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(d => (
-                  <div key={d} className="text-center text-[10px] tracking-[0.2em] text-neutral-600 uppercase pb-4">
+              <div className="grid grid-cols-7 gap-1.5 md:gap-2">
+                {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
+                  <div key={`${d}-${i}`} className="text-center text-[9px] tracking-[0.15em] text-white/25 uppercase pb-3">
                     {d}
                   </div>
                 ))}
@@ -72,7 +64,7 @@ export default function AvailabilityPage() {
                       status={result.status} 
                       remaining={result.remainingSlots}
                       label={result.label}
-                      isPast={day < new Date(now.setHours(0,0,0,0))}
+                      isPast={day < today}
                     />
                   );
                 })}
@@ -88,40 +80,40 @@ export default function AvailabilityPage() {
 function DayCell({ date, status, remaining, label, isPast }: { date: Date, status: DayStatus, remaining: number, label?: string, isPast: boolean }) {
   if (isPast) {
     return (
-      <div className="aspect-square flex flex-col items-center justify-center border border-transparent opacity-20">
-        <span className="text-lg md:text-xl font-light text-neutral-600">{format(date, "d")}</span>
+      <div className="aspect-square flex flex-col items-center justify-center">
+        <span className="text-sm md:text-base font-light text-white/10">{format(date, "d")}</span>
       </div>
     );
   }
 
   const isBookable = status === "available" || status === "limited";
-  const statusColor = {
-    available: "border-neutral-800 hover:border-white/50 text-neutral-200 hover:text-white bg-transparent",
-    limited: "border-amber-900/30 hover:border-amber-700/50 text-amber-500/80 hover:text-amber-400 bg-amber-950/10",
-    booked: "border-transparent text-neutral-800 bg-neutral-950/50",
-    unavailable: "border-transparent text-neutral-800 bg-neutral-950/50",
-    closed: "border-transparent text-neutral-800 bg-neutral-950/50",
-    travel: "border-transparent text-neutral-800 bg-neutral-950/50",
-    tbd: "border-transparent text-neutral-800 bg-neutral-950/50",
+  const statusStyle = {
+    available: "border-white/[0.08] text-white/70 hover:text-white hover:border-white/25",
+    limited: "border-amber-800/20 text-amber-500/60 hover:text-amber-400/80 hover:border-amber-700/30",
+    booked: "text-white/20",
+    unavailable: "text-white/20",
+    closed: "text-white/20",
+    travel: "text-white/20",
+    tbd: "text-white/20",
   }[status];
 
   const displayStatus = status === "booked" ? "unavailable" : status;
-  // Hide internal "Travel" and "Booked" labels from the public
   const finalLabel = (label === "Travel" || label === "Booked") ? "unavailable" : (label || displayStatus);
+  
   const content = (
     <>
-      <span className="text-lg md:text-xl font-light mb-1 md:mb-2">{format(date, "d")}</span>
-      <span className="text-[8px] md:text-[10px] tracking-[0.2em] uppercase text-center px-1 w-full truncate opacity-70">
+      <span className="text-sm md:text-base font-light">{format(date, "d")}</span>
+      <span className="text-[7px] md:text-[8px] tracking-[0.1em] uppercase opacity-50 mt-0.5 truncate max-w-full px-0.5">
         {finalLabel}
       </span>
     </>
   );
 
-  const baseClasses = `aspect-square flex flex-col items-center justify-center border transition-all duration-500 ${statusColor}`;
+  const baseClasses = `aspect-square flex flex-col items-center justify-center border border-transparent rounded-sm transition-colors duration-200 ${statusStyle}`;
 
   if (isBookable) {
     return (
-      <Link href={`/book?date=${format(date, "yyyy-MM-dd")}`} className={baseClasses}>
+      <Link href={`/book?date=${format(date, "yyyy-MM-dd")}`} className={`${baseClasses} focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40`}>
         {content}
       </Link>
     );

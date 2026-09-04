@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { href: "/work", label: "WORK" },
+  { href: "/work", label: "PORTFOLIO" },
   { href: "/availability", label: "AVAILABILITY" },
   { href: "/services", label: "SERVICES" },
   { href: "/about", label: "ABOUT" },
@@ -25,37 +25,41 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on navigation
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   const isHome = pathname === "/";
-  const bgClass = scrolled || !isHome || isOpen ? "bg-black/90 backdrop-blur-md border-b border-white/10" : "bg-transparent";
+  const showBg = scrolled || !isHome || isOpen;
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${bgClass}`}>
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-xl tracking-widest font-medium z-50 relative uppercase">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b ${showBg ? "bg-black/90 backdrop-blur-md border-white/[0.06]" : "bg-transparent border-transparent"}`}>
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12 h-16 flex items-center justify-between">
+          <Link 
+            href="/" 
+            className={`text-[13px] tracking-[0.2em] font-normal z-50 relative uppercase text-white/90 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${!showBg ? 'drop-shadow-sm' : ''}`}
+          >
             Atelier Bill
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 text-xs tracking-[0.2em] font-light">
+          <nav className="hidden md:flex items-center gap-10 text-[11px] tracking-[0.18em] font-light">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link 
                   key={link.href} 
                   href={link.href}
-                  className={`relative py-1 transition-colors duration-300 hover:text-white ${
-                    isActive ? "text-white" : "text-neutral-500"
-                  }`}
+                  className={`relative py-1 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
+                    isActive 
+                      ? "text-white/90" 
+                      : "text-white/40 hover:text-white/70"
+                  } ${!showBg ? 'drop-shadow-sm' : ''}`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/30" />
+                    <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-white/25" />
                   )}
                 </Link>
               );
@@ -64,11 +68,11 @@ export function Navbar() {
 
           {/* Mobile Toggle */}
           <button 
-            className="md:hidden z-50 relative p-2 -mr-2 text-white"
+            className="md:hidden z-50 relative p-2 -mr-2 text-white/80 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </header>
@@ -77,25 +81,26 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col justify-center items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[45] bg-black flex flex-col justify-center items-center"
           >
-            <nav className="flex flex-col items-center gap-8 text-xl tracking-[0.3em] font-light">
+            <nav className="flex flex-col items-center gap-8 text-sm tracking-[0.25em] font-light">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link 
                     key={link.href} 
                     href={link.href}
-                    className={`relative py-1 transition-colors duration-300 hover:text-white ${
-                      isActive ? "text-white" : "text-neutral-500"
+                    className={`relative py-1 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
+                      isActive ? "text-white" : "text-white/40 hover:text-white/60"
                     }`}
                   >
                     {link.label}
                     {isActive && (
-                      <span className="absolute bottom-0 left-1/4 right-1/4 h-[1px] bg-white/30" />
+                      <span className="absolute -bottom-1 left-1/4 right-1/4 h-px bg-white/25" />
                     )}
                   </Link>
                 );

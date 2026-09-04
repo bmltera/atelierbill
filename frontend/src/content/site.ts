@@ -9,10 +9,12 @@ export const siteConfig = {
   },
   hero: {
     // Local fallback/placeholder URLs for development (can be replaced with R2 URLs)
-    videoUrl: "/video.mp4",
-    mobileVideoUrl: "",
-    posterUrl: "https://picsum.photos/seed/hero/1920/1080",
+    videoUrl: "/showreel-large.mp4",
+    videoMediumUrl: "/showreel-medium.mp4",
+    videoSmallUrl: "/showreel-small.mp4",
+    mobileVideoUrl: "/showreel-small.mp4",
+    posterUrl: "",
   },
   bookingUrl: "/book",
-  availabilityText: "Availability is extremely limited and fills up quickly. Please review the calendar below for our next open dates.",
+  availabilityText: "Limited availability. See open dates below.",
 };
