@@ -3,47 +3,73 @@
 import { useSearchParams } from "next/navigation";
 import { siteConfig } from "@/content/site";
 import { Suspense } from "react";
+import { format } from "date-fns";
 
-function BookingForm() {
+function formatDisplayDate(dateStr: string | null): string | null {
+  if (!dateStr) return null;
+  try {
+    const parts = dateStr.trim().split("-");
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+        const d = new Date(year, month, day);
+        if (!isNaN(d.getTime())) {
+          return format(d, "EEEE, MMMM d").toUpperCase();
+        }
+      }
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function BookingContent() {
   const searchParams = useSearchParams();
   const dateStr = searchParams.get("date");
+  const formattedDate = formatDisplayDate(dateStr);
 
   return (
-    <div className="pt-32 pb-32 max-w-[1200px] mx-auto px-8 md:px-12 w-full flex flex-col items-center justify-center min-h-[75vh]">
-      <div className="w-full flex flex-col items-center py-24 relative">
-        <h1 className="text-[clamp(1.5rem,4vw,3rem)] font-extralight tracking-[0.25em] uppercase mb-10 text-center text-white/90">
+    <div className="flex-1 flex flex-col items-center justify-center min-h-[calc(100dvh-10rem)] px-6 py-16 md:py-24 text-center">
+      <div className="w-full max-w-xl flex flex-col items-center">
+        {/* Title */}
+        <h1 className="text-[clamp(1.5rem,4vw,2.75rem)] font-light tracking-[0.22em] uppercase text-white/90">
           Booking
         </h1>
 
-        {dateStr && (
-          <div className="mb-10 text-[11px] tracking-[0.15em] uppercase text-white/35 flex items-center gap-3">
-            <span className="h-px w-6 bg-white/10" />
-            <span>Requested Date: <span className="text-white/60 ml-1.5">{dateStr}</span></span>
-            <span className="h-px w-6 bg-white/10" />
-          </div>
+        {/* Selected Date: prominent but restrained, naturally formatted */}
+        {formattedDate && (
+          <p className="mt-4 sm:mt-5 text-[clamp(0.95rem,2.2vw,1.15rem)] font-normal tracking-[0.18em] uppercase text-white/65">
+            {formattedDate}
+          </p>
         )}
 
-        <p className="text-white/40 font-light mb-14 text-center max-w-sm leading-relaxed text-sm tracking-wide">
-          Please DM us on Instagram to inquire about availability and rates.
-        </p>
+        {/* Primary Interaction: Contact on Instagram */}
+        <div className={formattedDate ? "mt-12 sm:mt-16 md:mt-20" : "mt-10 sm:mt-14 md:mt-16"}>
+          <a
+            href={siteConfig.contact.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center text-center p-6 sm:p-8 -m-6 sm:-m-8 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-4 focus-visible:ring-offset-black rounded-sm"
+          >
+            <span className="text-[11px] md:text-[12px] tracking-[0.25em] uppercase font-light text-white/40 transition-colors duration-300 group-hover:text-white/65">
+              Contact on
+            </span>
+            
+            <span className="mt-2.5 sm:mt-3 text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.18em] uppercase text-white/90 transition-colors duration-300 group-hover:text-white">
+              Instagram
+            </span>
+            
+            <span className="mt-2 sm:mt-2.5 text-xs sm:text-sm tracking-[0.16em] text-white/45 transition-colors duration-300 group-hover:text-white/80 font-light">
+              @atelierbill
+            </span>
 
-        <a
-          href={siteConfig.contact.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex flex-col items-center text-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
-        >
-          <span className="text-[10px] tracking-[0.25em] uppercase text-white/30 mb-3 font-light transition-colors duration-200 group-hover:text-white/50">
-            Contact on
-          </span>
-          <span className="text-2xl md:text-4xl font-extralight tracking-[0.2em] uppercase text-white/85 group-hover:text-white transition-colors duration-200">
-            Instagram
-          </span>
-          <span className="text-xs md:text-sm tracking-[0.18em] text-white/45 group-hover:text-white/80 transition-colors duration-200 mt-2 font-light">
-            @atelierbill
-          </span>
-          <div className="h-px w-8 bg-white/20 transition-all duration-300 group-hover:w-20 group-hover:bg-white/60 mt-4" />
-        </a>
+            {/* Subtle underline reveal */}
+            <div className="mt-5 sm:mt-6 h-px w-8 bg-white/25 transition-all duration-300 group-hover:w-24 group-hover:bg-white/70" />
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -51,8 +77,8 @@ function BookingForm() {
 
 export default function BookPage() {
   return (
-    <Suspense fallback={<div className="pt-32 text-center text-white/30">Loading...</div>}>
-      <BookingForm />
+    <Suspense fallback={<div className="min-h-[70vh] flex items-center justify-center text-white/30 text-xs tracking-widest uppercase">Loading...</div>}>
+      <BookingContent />
     </Suspense>
   );
 }
