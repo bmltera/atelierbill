@@ -214,22 +214,22 @@ export function Hero() {
 
           {/* CTAs anchored below the title with generous editorial breathing room */}
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.0, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="absolute top-full flex flex-row gap-8 sm:gap-11 md:gap-14 lg:gap-16 items-center justify-center pointer-events-auto"
             style={{ marginTop: "clamp(2.25rem, 5.5vw, 4.5rem)" }}
           >
             <Link
               href="/work"
-              className="text-[12px] md:text-[11.5px] tracking-[0.09em] sm:tracking-[0.11em] uppercase font-medium text-white/90 border-b border-white/40 pb-1.5 transition-all duration-300 hover:text-white hover:border-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black whitespace-nowrap"
+              className="text-[12px] md:text-[11.5px] tracking-[0.09em] sm:tracking-[0.11em] uppercase font-medium text-white/90 border-b border-white/40 pb-1 transition-all duration-300 hover:text-white hover:border-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black whitespace-nowrap"
               style={{ textShadow: "0 1px 14px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)" }}
             >
               View Portfolio
             </Link>
             <Link
               href="/availability"
-              className="text-[12px] md:text-[11.5px] tracking-[0.09em] sm:tracking-[0.11em] uppercase font-medium text-white/90 border-b border-white/40 pb-1.5 transition-all duration-300 hover:text-white hover:border-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black whitespace-nowrap"
+              className="text-[12px] md:text-[11.5px] tracking-[0.09em] sm:tracking-[0.11em] uppercase font-medium text-white/90 border-b border-white/40 pb-1 transition-all duration-300 hover:text-white hover:border-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black whitespace-nowrap"
               style={{ textShadow: "0 1px 14px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.6)" }}
             >
               Check Availability
