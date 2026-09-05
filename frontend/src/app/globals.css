@@ -45,16 +45,19 @@
     @apply border-border;
   }
   
-  body {
-    @apply bg-black text-white antialiased font-sans selection:bg-white/90 selection:text-black;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  html, body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  body::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display: none;
+  }
+
+  body {
+    @apply bg-black text-white antialiased font-sans selection:bg-white/90 selection:text-black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   /* Consistent heading defaults — individual components override as needed */
