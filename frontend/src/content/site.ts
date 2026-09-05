@@ -15,7 +15,7 @@ export const siteConfig = {
     desktopWebm: "", // Optional progressive enhancement
     mobileMp4: "/showreel-mobile-v1.mp4",
     mobileWebm: "",
-    posterUrl: "",
+    posterUrl: "/showreel-poster-v1.webp",
   },
   bookingUrl: "/book",
   availabilityText: "Limited availability. See open dates below.",
