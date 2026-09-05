@@ -36,14 +36,9 @@ function BookingContent() {
     <div className="flex-1 flex flex-col items-center justify-center min-h-[calc(100dvh-10rem)] px-6 py-16 md:py-24 text-center">
       <div className="w-full max-w-xl flex flex-col items-center">
         {/* Title */}
-        <motion.h1 
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[clamp(1.5rem,4vw,2.75rem)] font-light tracking-[0.22em] uppercase text-white/90"
-        >
+        <h1 className="text-[clamp(1.5rem,4vw,2.75rem)] font-light tracking-[0.22em] uppercase text-white/90">
           Booking
-        </motion.h1>
+        </h1>
 
         {/* Selected Date: prominent but restrained, naturally formatted */}
         {formattedDate && (

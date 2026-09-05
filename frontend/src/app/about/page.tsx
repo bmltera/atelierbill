@@ -7,7 +7,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-32 pb-32 max-w-[1200px] mx-auto px-8 md:px-12 w-full">
-      <h1 className="text-[clamp(1.5rem,4vw,3rem)] font-extralight tracking-[0.25em] uppercase mb-32 text-center text-white/90 opacity-0 animate-fade-in-up">
+      <h1 className="text-[clamp(1.5rem,4vw,3rem)] font-extralight tracking-[0.25em] uppercase mb-32 text-center text-white/90">
         About
       </h1>
 
