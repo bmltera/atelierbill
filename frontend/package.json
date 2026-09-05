@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "node ../tools/ensure_lightningcss.js",
-    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true TURBOPACK=0 next build",
+    "build": "next build",
     "start": "npx serve@latest out",
     "lint": "eslint .",
     "test": "vitest run"
