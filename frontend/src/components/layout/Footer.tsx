@@ -17,12 +17,6 @@ export function Footer() {
           >
             Instagram
           </a>
-          <a 
-            href={`mailto:${siteConfig.contact.email}`}
-            className="text-white/20 hover:text-white/40 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
-          >
-            Email
-          </a>
         </div>
       </div>
     </footer>
