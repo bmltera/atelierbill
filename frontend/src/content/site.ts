@@ -8,13 +8,14 @@ export const siteConfig = {
     instagram: "https://instagram.com/atelierbill",
   },
   hero: {
-    // Increment this version when replacing the showreel files to bust browser cache
-    videoVersion: "1.0.0",
-    videoUrl: "/showreel-large.mp4",
-    videoMediumUrl: "/showreel-medium.mp4",
-    videoSmallUrl: "/showreel-small.mp4",
-    mobileVideoUrl: "/showreel-small.mp4",
-    posterUrl: "",
+    // These are versioned, immutable assets designed to be cached forever.
+    // When updating the showreel, increment the version (e.g. -v2.mp4) 
+    // and update these paths. Do not replace the existing files.
+    desktopMp4: "/showreel-desktop-v1.mp4",
+    desktopWebm: "", // Optional progressive enhancement
+    mobileMp4: "/showreel-mobile-v1.mp4",
+    mobileWebm: "",
+    posterUrl: "/showreel-poster-v1.webp",
   },
   bookingUrl: "/book",
   availabilityText: "Limited availability. See open dates below.",

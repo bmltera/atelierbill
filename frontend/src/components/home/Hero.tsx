@@ -14,69 +14,11 @@ const titleClasses =
   "text-[clamp(2.25rem,6.5vw,5.5rem)] tracking-[0.10em] sm:tracking-[0.14em] md:tracking-[0.16em] uppercase font-normal leading-none font-[family-name:var(--font-display)]";
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false);
-  const [videoSrc, setVideoSrc] = useState<string>(siteConfig.hero.videoUrl);
-
-  useEffect(() => {
-    setMounted(true);
-
-    function resolveOptimalVideoTier() {
-      const hero = siteConfig.hero;
-      const largeSrc = hero.videoUrl || "/showreel-large.mp4";
-      const mediumSrc = hero.videoMediumUrl || "/showreel-medium.mp4";
-      const smallSrc = hero.videoSmallUrl || hero.mobileVideoUrl || "/showreel-small.mp4";
-
-      // Check Network Information API
-      const nav = typeof navigator !== "undefined" ? (navigator as any) : null;
-      const conn = nav?.connection || nav?.mozConnection || nav?.webkitConnection;
-
-      // Apply cache-busting version parameter if available
-      const versionStr = hero.videoVersion ? `?v=${hero.videoVersion}` : "";
-
-      // 1. Data Saver mode enabled -> prioritize small (480p)
-      if (conn?.saveData) {
-        setVideoSrc(`${smallSrc}${versionStr}`);
-        return;
-      }
-
-      // 2. Slow connection (2G, slow-2g, or downlink < 1.8 Mbps)
-      const isSlow =
-        conn?.effectiveType === "slow-2g" ||
-        conn?.effectiveType === "2g" ||
-        (typeof conn?.downlink === "number" && conn.downlink < 1.8);
-
-      if (isSlow) {
-        setVideoSrc(`${smallSrc}${versionStr}`);
-        return;
-      }
-
-      // 3. Moderate connection (3G, downlink < 4.5 Mbps, or narrow mobile device on cellular)
-      const isModerate =
-        conn?.effectiveType === "3g" ||
-        (typeof conn?.downlink === "number" && conn.downlink < 4.5) ||
-        (typeof window !== "undefined" && window.innerWidth < 640 && conn?.effectiveType !== "4g");
-
-      if (isModerate) {
-        setVideoSrc(`${mediumSrc}${versionStr}`);
-        return;
-      }
-
-      // 4. Fast broadband / high-speed Wi-Fi / 4G -> 1080p Large
-      setVideoSrc(`${largeSrc}${versionStr}`);
-    }
-
-    resolveOptimalVideoTier();
-
-    // Listen for network changes (e.g. user moves from Wi-Fi to cellular)
-    const nav = typeof navigator !== "undefined" ? (navigator as any) : null;
-    const conn = nav?.connection || nav?.mozConnection || nav?.webkitConnection;
-    if (conn?.addEventListener) {
-      conn.addEventListener("change", resolveOptimalVideoTier);
-      return () => conn.removeEventListener("change", resolveOptimalVideoTier);
-    }
-  }, []);
-
-  const hasVideo = mounted && Boolean(videoSrc);
+  const hero = siteConfig.hero;
+  
+  // We check for window to ensure we don't render the video tag immediately on server 
+  // if it causes hydration mismatches, but native <source> tags are hydration-safe.
+  const hasVideo = Boolean(hero.desktopMp4 || hero.mobileMp4);
 
   return (
     <section className="relative w-full h-[100dvh] min-h-[500px] flex items-center justify-center overflow-hidden bg-black">
@@ -86,14 +28,20 @@ export function Hero() {
       <div className="absolute inset-0 z-0 bg-black">
         {hasVideo ? (
           <video
-            key={videoSrc}
             autoPlay
             loop
             muted
             playsInline
+            poster={hero.posterUrl || undefined}
+            preload="auto"
             className="object-cover w-full h-full"
           >
-            <source src={videoSrc} type="video/mp4" />
+            {/* Mobile-first sources */}
+            {hero.mobileWebm && <source src={hero.mobileWebm} type="video/webm" media="(max-width: 767px)" />}
+            {hero.mobileMp4 && <source src={hero.mobileMp4} type="video/mp4" media="(max-width: 767px)" />}
+            {/* Desktop sources */}
+            {hero.desktopWebm && <source src={hero.desktopWebm} type="video/webm" media="(min-width: 768px)" />}
+            {hero.desktopMp4 && <source src={hero.desktopMp4} type="video/mp4" media="(min-width: 768px)" />}
           </video>
         ) : null}
 
@@ -149,14 +97,20 @@ export function Hero() {
         <div className="absolute inset-0 overflow-hidden bg-black">
           {hasVideo ? (
             <video
-              key={`mask-${videoSrc}`}
               autoPlay
               loop
               muted
               playsInline
+              poster={hero.posterUrl || undefined}
+              preload="auto"
               className="object-cover w-full h-full grayscale brightness-[1.35] contrast-[1.45]"
             >
-              <source src={videoSrc} type="video/mp4" />
+              {/* Note: Browser networking stack will automatically deduplicate fetches for the exact same source URLs */}
+              {hero.mobileWebm && <source src={hero.mobileWebm} type="video/webm" media="(max-width: 767px)" />}
+              {hero.mobileMp4 && <source src={hero.mobileMp4} type="video/mp4" media="(max-width: 767px)" />}
+              
+              {hero.desktopWebm && <source src={hero.desktopWebm} type="video/webm" media="(min-width: 768px)" />}
+              {hero.desktopMp4 && <source src={hero.desktopMp4} type="video/mp4" media="(min-width: 768px)" />}
             </video>
           ) : null}
         </div>
