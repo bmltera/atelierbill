@@ -33,7 +33,6 @@ export function Hero() {
             muted
             playsInline
             poster={hero.posterUrl || undefined}
-            preload="auto"
             className="object-cover w-full h-full"
           >
             {/* Mobile-first sources */}
@@ -102,7 +101,6 @@ export function Hero() {
               muted
               playsInline
               poster={hero.posterUrl || undefined}
-              preload="auto"
               className="object-cover w-full h-full grayscale brightness-[1.35] contrast-[1.45]"
             >
               {/* Note: Browser networking stack will automatically deduplicate fetches for the exact same source URLs */}
