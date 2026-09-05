@@ -8,7 +8,8 @@ export const siteConfig = {
     instagram: "https://instagram.com/atelierbill",
   },
   hero: {
-    // Local fallback/placeholder URLs for development (can be replaced with R2 URLs)
+    // Increment this version when replacing the showreel files to bust browser cache
+    videoVersion: "1.0.0",
     videoUrl: "/showreel-large.mp4",
     videoMediumUrl: "/showreel-medium.mp4",
     videoSmallUrl: "/showreel-small.mp4",

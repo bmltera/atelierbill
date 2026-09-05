@@ -30,9 +30,12 @@ export function Hero() {
       const nav = typeof navigator !== "undefined" ? (navigator as any) : null;
       const conn = nav?.connection || nav?.mozConnection || nav?.webkitConnection;
 
+      // Apply cache-busting version parameter if available
+      const versionStr = hero.videoVersion ? `?v=${hero.videoVersion}` : "";
+
       // 1. Data Saver mode enabled -> prioritize small (480p)
       if (conn?.saveData) {
-        setVideoSrc(smallSrc);
+        setVideoSrc(`${smallSrc}${versionStr}`);
         return;
       }
 
@@ -43,7 +46,7 @@ export function Hero() {
         (typeof conn?.downlink === "number" && conn.downlink < 1.8);
 
       if (isSlow) {
-        setVideoSrc(smallSrc);
+        setVideoSrc(`${smallSrc}${versionStr}`);
         return;
       }
 
@@ -54,12 +57,12 @@ export function Hero() {
         (typeof window !== "undefined" && window.innerWidth < 640 && conn?.effectiveType !== "4g");
 
       if (isModerate) {
-        setVideoSrc(mediumSrc);
+        setVideoSrc(`${mediumSrc}${versionStr}`);
         return;
       }
 
       // 4. Fast broadband / high-speed Wi-Fi / 4G -> 1080p Large
-      setVideoSrc(largeSrc);
+      setVideoSrc(`${largeSrc}${versionStr}`);
     }
 
     resolveOptimalVideoTier();
