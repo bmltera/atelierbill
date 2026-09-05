@@ -50,7 +50,7 @@
   }
   
   * {
-    @apply border-border;
+    @apply border-hairline;
   }
   
   html, body {
