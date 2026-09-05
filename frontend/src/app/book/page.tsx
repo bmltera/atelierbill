@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
+import { siteConfig } from "@/content/site";
 
 function formatDisplayDate(dateStr: string | null): string | null {
   if (!dateStr) return null;
