@@ -29,13 +29,13 @@ export function SelectedWork() {
                     src={project.thumbnail}
                     alt={project.title}
                     fill
-                    className="object-cover transition-all duration-[800ms] ease-out group-hover:scale-[1.02] opacity-80 group-hover:opacity-100"
+                    className="object-cover transition-transform duration-500 ease-premium md:group-hover:scale-[1.015] opacity-80 md:group-hover:opacity-100"
                   />
                 </div>
                 
-                <div className="flex flex-col md:flex-row justify-between items-start gap-4 transition-transform duration-[800ms] ease-out group-hover:translate-x-1">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-4 transition-transform duration-300 ease-premium md:group-hover:translate-x-1">
                   <div>
-                    <h3 className="text-2xl md:text-4xl font-light tracking-wide uppercase mb-2 text-neutral-200 group-hover:text-white transition-colors duration-500">
+                    <h3 className="text-2xl md:text-4xl font-light tracking-wide uppercase mb-2 text-neutral-200 md:group-hover:text-white transition-colors duration-300">
                       {project.title}
                     </h3>
                     <div className="text-xs text-neutral-500 tracking-[0.2em] uppercase">

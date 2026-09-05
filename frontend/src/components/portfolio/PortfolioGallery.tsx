@@ -85,7 +85,7 @@ export function PortfolioGallery({ projects }: PortfolioGalleryProps) {
                   alt={project.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] opacity-85 group-hover:opacity-100"
+                  className="object-cover transition-transform duration-500 ease-premium md:group-hover:scale-[1.015] opacity-85 md:group-hover:opacity-100"
                   priority={idx < 2}
                 />
 
@@ -93,16 +93,16 @@ export function PortfolioGallery({ projects }: PortfolioGalleryProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Subtle Minimal Play Indicator */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-13 h-13 md:w-14 md:h-14 rounded-full bg-black/45 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/90 shadow-2xl transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-white group-hover:border-white group-hover:text-black">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-premium">
+                  <div className="w-13 h-13 md:w-14 md:h-14 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/90 shadow-2xl">
                     <Play size={18} className="ml-0.5 fill-current" />
                   </div>
                 </div>
               </div>
 
               {/* Minimal Card Header */}
-              <div className="mt-5 flex flex-col gap-1">
-                <h2 className="text-sm md:text-base font-light tracking-[0.14em] uppercase text-white/90 group-hover:text-white transition-colors duration-300">
+              <div className="mt-5 flex flex-col gap-1 transition-transform duration-300 ease-premium md:group-hover:translate-x-1">
+                <h2 className="text-sm md:text-base font-light tracking-[0.14em] uppercase text-white/90 md:group-hover:text-white transition-colors duration-300">
                   {project.title}
                 </h2>
                 <div className="text-[11px] text-white/40 tracking-[0.2em] uppercase font-light flex items-center gap-2">

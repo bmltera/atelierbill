@@ -3,6 +3,7 @@
 import { siteConfig } from "@/content/site";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 /* ──────────────────────────────────────────────────────────────────
    Title typography — shared across all 3 layers so they align pixel-
@@ -112,12 +113,12 @@ export function Hero() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════
-          TITLE LAYER 1 — Base text (foundational readability)
-          Subtle off-white fill with deep shadow provides a stable
-          shadow shelf, allowing the moving video texture in Layer 2
-          to have full dynamic contrast without washing out.
+          TITLE LAYER 1 — Base text
           ═══════════════════════════════════════════════════════════ */}
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         className="absolute inset-0 z-10 flex items-center justify-center text-center pointer-events-none"
         style={{ marginTop: "-3vh" }}
       >
@@ -131,15 +132,17 @@ export function Hero() {
         >
           {siteConfig.name}
         </h1>
-      </div>
+      </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════
-          TITLE LAYER 2 — Masked video (the dynamic dual-video effect)
-          Duplicate video with boosted contrast and silver luminance.
-          Motion, dancers, choreography, and light sweeps punch
-          through the letterforms with vivid clarity.
+          TITLE LAYER 2 — Masked video
           ═══════════════════════════════════════════════════════════ */}
-      <div className="absolute inset-0 z-20 pointer-events-none mix-blend-screen">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0 z-20 pointer-events-none mix-blend-screen"
+      >
         <div className="absolute inset-0 overflow-hidden bg-black">
           {hasVideo ? (
             <video
@@ -164,14 +167,15 @@ export function Hero() {
             {siteConfig.name}
           </span>
         </div>
-      </div>
+      </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════
           TITLE LAYER 3 — Edge / stroke highlight
-          Crisp, fine text-stroke ensures letterform edges stay
-          razor-sharp even during dark video frames.
           ═══════════════════════════════════════════════════════════ */}
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         className="absolute inset-0 z-30 flex items-center justify-center text-center pointer-events-none"
         style={{ marginTop: "-3vh" }}
       >
@@ -185,7 +189,7 @@ export function Hero() {
         >
           {siteConfig.name}
         </span>
-      </div>
+      </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════
           CONTENT LAYER — CTAs
@@ -209,7 +213,10 @@ export function Hero() {
           </div>
 
           {/* CTAs anchored below the title with generous editorial breathing room */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="absolute top-full flex flex-row gap-8 sm:gap-11 md:gap-14 lg:gap-16 items-center justify-center pointer-events-auto"
             style={{ marginTop: "clamp(2.25rem, 5.5vw, 4.5rem)" }}
           >
@@ -227,7 +234,7 @@ export function Hero() {
             >
               Check Availability
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

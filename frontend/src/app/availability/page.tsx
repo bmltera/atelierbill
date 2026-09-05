@@ -5,6 +5,7 @@ import { engine, selectors } from "@/availability";
 import { format, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, getDay } from "date-fns";
 import Link from "next/link";
 import { DayStatus } from "@/availability/types";
+import { motion } from "framer-motion";
 
 export default function AvailabilityPage() {
   const [mounted, setMounted] = useState(false);
@@ -37,7 +38,12 @@ export default function AvailabilityPage() {
           const startPadding = getDay(start);
           
           return (
-            <div key={monthDate.toISOString()}>
+            <motion.div 
+              key={monthDate.toISOString()}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
               <h2 className="text-lg md:text-xl font-extralight tracking-[0.2em] uppercase text-white/60 mb-8 pb-4 border-b border-white/[0.06]">
                 {format(monthDate, "MMMM yyyy")}
               </h2>
@@ -69,7 +75,7 @@ export default function AvailabilityPage() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
@@ -109,7 +115,7 @@ function DayCell({ date, status, remaining, label, isPast }: { date: Date, statu
     </>
   );
 
-  const baseClasses = `aspect-square flex flex-col items-center justify-center border border-transparent rounded-sm transition-colors duration-200 ${statusStyle}`;
+  const baseClasses = `aspect-square flex flex-col items-center justify-center border border-transparent rounded-sm transition-colors duration-300 ease-premium ${statusStyle}`;
 
   if (isBookable) {
     return (

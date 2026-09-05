@@ -51,7 +51,7 @@ export function Navbar() {
                 <Link 
                   key={link.href} 
                   href={link.href}
-                  className={`relative py-1 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
+                  className={`relative py-1 transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
                     isActive 
                       ? "text-white/90" 
                       : "text-white/40 hover:text-white/70"
@@ -59,7 +59,11 @@ export function Navbar() {
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-white/25" />
+                    <motion.span 
+                      layoutId="navbar-underline"
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute -bottom-0.5 left-0 right-0 h-px bg-white/25" 
+                    />
                   )}
                 </Link>
               );
@@ -94,13 +98,17 @@ export function Navbar() {
                   <Link 
                     key={link.href} 
                     href={link.href}
-                    className={`relative py-1 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
+                    className={`relative py-1 transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
                       isActive ? "text-white" : "text-white/40 hover:text-white/60"
                     }`}
                   >
                     {link.label}
                     {isActive && (
-                      <span className="absolute -bottom-1 left-1/4 right-1/4 h-px bg-white/25" />
+                      <motion.span 
+                        layoutId="mobile-navbar-underline"
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute -bottom-1 left-1/4 right-1/4 h-px bg-white/25" 
+                      />
                     )}
                   </Link>
                 );

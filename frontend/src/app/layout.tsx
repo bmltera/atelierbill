@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/content/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
+import { Providers } from "@/components/layout/Providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -51,9 +52,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${geist.variable} font-sans min-h-screen flex flex-col bg-black text-white`}>
-        <Navbar />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <ConditionalFooter />
+        <Providers>
+          <Navbar />
+          <main className="flex-1 flex flex-col">{children}</main>
+          <ConditionalFooter />
+        </Providers>
       </body>
     </html>
   );
