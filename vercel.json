@@ -4,7 +4,16 @@
   "installCommand": "npm install --no-package-lock",
   "headers": [
     {
-      "source": "/(.*)\\.(mp4|webm)",
+      "source": "/(.*\\.mp4)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.webm)",
       "headers": [
         {
           "key": "Cache-Control",
