@@ -105,9 +105,9 @@ export function PortfolioGallery({ projects }: PortfolioGalleryProps) {
                 <h2 className="text-sm md:text-base font-light tracking-[0.14em] uppercase text-white/90 md:group-hover:text-white transition-colors duration-300">
                   {project.title}
                 </h2>
-                <div className="text-[11px] text-white/40 tracking-[0.2em] uppercase font-light flex items-center gap-2">
+                <div className="text-[11px] text-secondary tracking-[0.2em] uppercase font-light flex items-center gap-2">
                   <span>{project.clientOrArtist}</span>
-                  <span className="opacity-30">•</span>
+                  <span className="text-tertiary">•</span>
                   <span>{project.year}</span>
                 </div>
               </div>
@@ -138,11 +138,11 @@ export function PortfolioGallery({ projects }: PortfolioGalleryProps) {
               {/* Modal Top Bar */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xs tracking-[0.2em] uppercase text-white/50 font-light">
+                  <span className="text-xs tracking-[0.2em] uppercase text-secondary font-light">
                     {selectedProject.clientOrArtist}
                   </span>
-                  <span className="text-white/20">•</span>
-                  <span className="text-xs tracking-[0.2em] uppercase text-white/50 font-light">
+                  <span className="text-tertiary">•</span>
+                  <span className="text-xs tracking-[0.2em] uppercase text-secondary font-light">
                     {selectedProject.year}
                   </span>
                 </div>

@@ -44,13 +44,13 @@ export default function AvailabilityPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h2 className="text-lg md:text-xl font-extralight tracking-[0.2em] uppercase text-white/60 mb-8 pb-4 border-b border-white/[0.06]">
+              <h2 className="text-lg md:text-xl font-extralight tracking-[0.2em] uppercase text-secondary mb-8 pb-4 border-b border-hairline">
                 {format(monthDate, "MMMM yyyy")}
               </h2>
 
               <div className="grid grid-cols-7 gap-1.5 md:gap-2">
                 {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
-                  <div key={`${d}-${i}`} className="text-center text-[9px] tracking-[0.15em] text-white/25 uppercase pb-3">
+                  <div key={`${d}-${i}`} className="text-center text-[9px] tracking-[0.15em] text-tertiary uppercase pb-3">
                     {d}
                   </div>
                 ))}
@@ -94,13 +94,13 @@ function DayCell({ date, status, remaining, label, isPast }: { date: Date, statu
 
   const isBookable = status === "available" || status === "limited";
   const statusStyle = {
-    available: "border-white/[0.08] text-white/70 hover:text-white hover:border-white/25",
-    limited: "border-amber-800/20 text-amber-500/60 hover:text-amber-400/80 hover:border-amber-700/30",
-    booked: "text-white/20",
-    unavailable: "text-white/20",
-    closed: "text-white/20",
-    travel: "text-white/20",
-    tbd: "text-white/20",
+    available: "border-hairline text-white/70 hover:text-white hover:border-white/25",
+    limited: "border-limited-soft text-limited hover:text-limited hover:brightness-125 hover:border-limited/30",
+    booked: "text-tertiary",
+    unavailable: "text-tertiary",
+    closed: "text-tertiary",
+    travel: "text-tertiary",
+    tbd: "text-tertiary",
   }[status];
 
   const displayStatus = status === "booked" ? "unavailable" : status;

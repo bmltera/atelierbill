@@ -38,7 +38,7 @@ export function Navbar() {
         <div className="max-w-[1400px] mx-auto px-8 md:px-12 h-16 flex items-center justify-between">
           <Link 
             href="/" 
-            className={`text-[13px] tracking-[0.2em] font-normal z-50 relative uppercase text-white/90 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${!showBg ? 'drop-shadow-sm' : ''}`}
+            className={`text-[13px] tracking-[0.2em] font-normal z-50 relative uppercase text-white/95 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${!showBg ? 'drop-shadow-sm' : ''}`}
           >
             Atelier Bill
           </Link>
@@ -53,8 +53,8 @@ export function Navbar() {
                   href={link.href}
                   className={`relative py-1 transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
                     isActive 
-                      ? "text-white/90" 
-                      : "text-white/40 hover:text-white/70"
+                      ? "text-white/95" 
+                      : "text-white/50 hover:text-white/75"
                   } ${!showBg ? 'drop-shadow-sm' : ''}`}
                 >
                   {link.label}
@@ -99,7 +99,7 @@ export function Navbar() {
                     key={link.href} 
                     href={link.href}
                     className={`relative py-1 transition-colors duration-300 ease-premium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 ${
-                      isActive ? "text-white" : "text-white/40 hover:text-white/60"
+                      isActive ? "text-white/95" : "text-white/50 hover:text-white/75"
                     }`}
                   >
                     {link.label}

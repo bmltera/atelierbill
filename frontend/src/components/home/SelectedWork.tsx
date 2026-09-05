@@ -8,7 +8,7 @@ export function SelectedWork() {
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-xs text-neutral-500 tracking-[0.3em] uppercase mb-16">Selected Work</h2>
+        <h2 className="text-xs text-secondary tracking-[0.3em] uppercase mb-16">Selected Work</h2>
         
         <div className="flex flex-col gap-24 md:gap-0">
           {featured.map((project, idx) => {
@@ -35,16 +35,16 @@ export function SelectedWork() {
                 
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4 transition-transform duration-300 ease-premium md:group-hover:translate-x-1">
                   <div>
-                    <h3 className="text-2xl md:text-4xl font-light tracking-wide uppercase mb-2 text-neutral-200 md:group-hover:text-white transition-colors duration-300">
+                    <h3 className="text-2xl md:text-4xl font-light tracking-wide uppercase mb-2 text-primary md:group-hover:text-white transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <div className="text-xs text-neutral-500 tracking-[0.2em] uppercase">
-                      {project.clientOrArtist} <span className="opacity-50 mx-1">/</span> {project.year}
+                    <div className="text-xs text-secondary tracking-[0.2em] uppercase">
+                      {project.clientOrArtist} <span className="text-tertiary mx-1">/</span> {project.year}
                     </div>
                   </div>
                   
                   {project.credits?.[0] && (
-                    <div className="text-xs text-neutral-500 tracking-[0.2em] uppercase hidden md:block text-right">
+                    <div className="text-xs text-secondary tracking-[0.2em] uppercase hidden md:block text-right">
                       {project.credits[0]}
                     </div>
                   )}

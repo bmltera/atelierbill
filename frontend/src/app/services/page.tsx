@@ -11,13 +11,13 @@ export default function ServicesPage() {
         Services
       </h1>
       
-      <div className="flex flex-col border-b border-white/[0.06]">
+      <div className="flex flex-col border-b border-hairline">
         {services.map((service) => (
-          <div key={service.id} className="border-t border-white/[0.06] py-14 md:py-20">
+          <div key={service.id} className="border-t border-hairline py-14 md:py-20">
             <h2 className="text-[clamp(1.25rem,3vw,2.5rem)] font-extralight tracking-[0.12em] uppercase mb-6 text-white/80">
               {service.title}
             </h2>
-            <p className="text-white/35 font-light leading-relaxed text-base md:text-lg max-w-2xl">
+            <p className="text-secondary font-light leading-relaxed text-base md:text-lg max-w-2xl">
               {service.description}
             </p>
           </div>
