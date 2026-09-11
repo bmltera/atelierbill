@@ -49,18 +49,6 @@ export const ranges: AvailabilityRange[] = [
     "publicLabel": "Limited"
   },
   {
-    "start": "2026-09-13",
-    "end": "2026-09-13",
-    "status": "limited",
-    "publicLabel": "Limited"
-  },
-  {
-    "start": "2026-10-04",
-    "end": "2026-10-04",
-    "status": "limited",
-    "publicLabel": "Limited"
-  },
-  {
     "start": "2026-10-07",
     "end": "2026-10-12",
     "status": "unavailable",
@@ -103,12 +91,6 @@ export const ranges: AvailabilityRange[] = [
     "publicLabel": "Travel"
   },
   {
-    "start": "2026-11-24",
-    "end": "2026-11-24",
-    "status": "unavailable",
-    "publicLabel": "Unavailable"
-  },
-  {
     "start": "2026-11-26",
     "end": "2026-11-26",
     "status": "unavailable",
@@ -139,22 +121,70 @@ export const ranges: AvailabilityRange[] = [
     "publicLabel": "Travel"
   },
   {
-    "start": "2026-09-20",
-    "end": "2026-09-20",
-    "status": "booked",
-    "publicLabel": "Booked"
-  },
-  {
     "start": "2026-10-31",
     "end": "2026-10-31",
     "status": "unavailable",
     "publicLabel": "Unavailable"
   },
   {
+    "start": "2026-09-13",
+    "end": "2026-09-13",
+    "status": "limited",
+    "publicLabel": "Limited"
+  },
+  {
+    "start": "2026-09-20",
+    "end": "2026-09-20",
+    "status": "limited",
+    "publicLabel": "Limited"
+  },
+  {
+    "start": "2026-09-19",
+    "end": "2026-09-19",
+    "status": "limited",
+    "publicLabel": "Limited"
+  },
+  {
+    "start": "2026-10-03",
+    "end": "2026-10-03",
+    "status": "limited",
+    "publicLabel": "Limited"
+  },
+  {
+    "start": "2026-10-04",
+    "end": "2026-10-04",
+    "status": "booked",
+    "publicLabel": "Booked"
+  },
+  {
+    "start": "2026-10-17",
+    "end": "2026-10-17",
+    "status": "limited",
+    "publicLabel": "Limited"
+  },
+  {
     "start": "2026-11-01",
     "end": "2026-11-01",
+    "status": "booked",
+    "publicLabel": "Booked"
+  },
+  {
+    "start": "2026-11-24",
+    "end": "2026-11-24",
     "status": "unavailable",
     "publicLabel": "Unavailable"
+  },
+  {
+    "start": "2026-12-12",
+    "end": "2026-12-12",
+    "status": "limited",
+    "publicLabel": "Limited"
+  },
+  {
+    "start": "2026-12-13",
+    "end": "2026-12-13",
+    "status": "limited",
+    "publicLabel": "Limited"
   }
 ];
 

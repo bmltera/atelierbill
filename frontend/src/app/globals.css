@@ -11,7 +11,10 @@
   --color-hairline: rgba(234, 231, 225, 0.10);
 
   --color-limited: #a66f28;
-  --color-limited-soft: rgba(166, 111, 40, 0.12);
+  --color-limited-soft: rgba(166, 111, 40, 0.20);
+  
+  --color-available: #6d8c61;
+  --color-available-soft: rgba(109, 140, 97, 0.15);
 
   /* Override standard black and white for a cohesive look */
   --color-black: var(--color-bg);

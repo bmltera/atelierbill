@@ -94,13 +94,13 @@ function DayCell({ date, status, remaining, label, isPast }: { date: Date, statu
 
   const isBookable = status === "available" || status === "limited";
   const statusStyle = {
-    available: "border-hairline text-white/70 hover:text-white hover:border-white/25",
-    limited: "border-limited-soft text-limited hover:text-limited hover:brightness-125 hover:border-limited/30",
-    booked: "text-tertiary",
-    unavailable: "text-tertiary",
-    closed: "text-tertiary",
-    travel: "text-tertiary",
-    tbd: "text-tertiary",
+    available: "border-available-soft text-available hover:brightness-125 hover:border-available/40",
+    limited: "border-limited-soft text-limited hover:brightness-125 hover:border-limited/40",
+    booked: "border-transparent text-tertiary",
+    unavailable: "border-transparent text-tertiary",
+    closed: "border-transparent text-tertiary",
+    travel: "border-transparent text-tertiary",
+    tbd: "border-transparent text-tertiary",
   }[status];
 
   const displayStatus = status === "booked" ? "unavailable" : status;
@@ -115,7 +115,7 @@ function DayCell({ date, status, remaining, label, isPast }: { date: Date, statu
     </>
   );
 
-  const baseClasses = `aspect-square flex flex-col items-center justify-center border border-transparent rounded-sm transition-colors duration-300 ease-premium ${statusStyle}`;
+  const baseClasses = `aspect-square flex flex-col items-center justify-center border rounded-sm transition-colors duration-300 ease-premium ${statusStyle}`;
 
   if (isBookable) {
     return (
