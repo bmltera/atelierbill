@@ -16,7 +16,7 @@ export default function AvailabilityPage() {
   useEffect(() => {
     setMounted(true);
     const m = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       m.push(addMonths(now, i));
     }
     setMonths(m);
