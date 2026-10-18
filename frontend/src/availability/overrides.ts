@@ -233,6 +233,36 @@ export const ranges: AvailabilityRange[] = [
     "end": "2026-11-29",
     "status": "unavailable",
     "publicLabel": "Unavailable"
+  },
+  {
+    "start": "2026-11-07",
+    "end": "2026-11-07",
+    "status": "booked",
+    "publicLabel": "Booked"
+  },
+  {
+    "start": "2027-01-23",
+    "end": "2027-01-23",
+    "status": "unavailable",
+    "publicLabel": "Travel"
+  },
+  {
+    "start": "2027-01-24",
+    "end": "2027-01-24",
+    "status": "unavailable",
+    "publicLabel": "Travel"
+  },
+  {
+    "start": "2026-10-24",
+    "end": "2026-10-24",
+    "status": "booked",
+    "publicLabel": "Booked"
+  },
+  {
+    "start": "2026-10-25",
+    "end": "2026-10-25",
+    "status": "booked",
+    "publicLabel": "Booked"
   }
 ];
 
